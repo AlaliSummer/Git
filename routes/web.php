@@ -26,7 +26,7 @@ Route::post('/uploaded', [UploadFileController::class, 'UploadedDone'])->name('f
 // Test B2
 // First testing of GitKraken whith commit "First GitKraken"
 // empty
-//new
+//new so
 //other one d new
 Route::get('test','Admin\FirstController@Show');
 Route::get('test1','Admin\FirstController@Show1');
