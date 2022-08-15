@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadFileController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,15 +25,12 @@ Route::get('/show', function () {
 });
 Route::get('/upload', [UploadFileController::class, 'UploadFile']);
 Route::post('/uploaded', [UploadFileController::class, 'UploadedDone'])->name('file.upload');
-// Test B1
-// Test B2
-// First testing of GitKraken whith commit "First GitKraken"
-// empt
-//new so
-//other one d new
-Route::get('test','Admin\FirstController@Show');
-Route::get('test1','Admin\FirstController@Show1');
-Route::get('test2','Admin\FirstController@Show2');
-Route::get('testshow','Admin\FirstController@Show');
-Route::get('testing','Admin\FirstController@Show');
-Route::get('show','Admin\FirstController@Show');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('products', ProductController::class);
+});
